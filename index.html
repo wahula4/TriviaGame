@@ -1,1 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	    <meta charset="UTF-8">
+	    <title>Trivia Game</title>
+	    <!-- Added link to the jQuery Library -->
+	    <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+	    <link rel="stylesheet" href="assets/css/style.css">
+	</head>
 
+	<body>
+	<div class="container">
+		<div>Trivia!</div>
+		
+			<div id="start-screen">
+				<input id="StartButton" type="button" value="Start"/>
+			</div>
+			<div id="display">
+				<div>Time Remaining: <span id="countdown"></span> </div>
+				<div>				
+					<p class="question">1. What MLB team did George Costanza work for?</p>        
+
+					 <ul class="answers">            
+					  <input type="radio" name="q1" value="0" id="q1a"><label for="q1a">New York Mets</label>        
+					  <input type="radio" name="q1" value="1" id="q1a"><label for="q1b">New York Yankees</label>        
+					  <input type="radio" name="q1" value="0" id="q1a"><label for="q1c">Cleveland Indians</label>         
+					  <input type="radio" name="q1" value="0" id="q1a"><label for="q1d">L.A. Dodgers</label> 
+					 </ul>   
+
+					<p class="question">2. What candy bar did George have stolen by the mechanic at Puddy's car dealership?</p>        
+
+					 <ul class="answers">            
+					  <input type="radio" name="q2" value="0" id="q1a"><label for="q1a">Clark Bar</label>        
+					  <input type="radio" name="q2" value="0" id="q1b"><label for="q1b">Snickers</label>        
+					  <input type="radio" name="q2" value="0" id="q1c"><label for="q1c">Hershey's</label>         
+					  <input type="radio" name="q2" value="1" id="q1d"><label for="q1d">Twix</label> 
+					 </ul> 
+
+					<p class="question">3. Which famous Broady star did Kramer injure in a softball game?</p>        
+
+					 <ul class="answers">            
+					  <input type="radio" name="q3" value="0" id="q1a"><label for="q1a">Liza Minnelli</label>        
+					  <input type="radio" name="q3" value="1" id="q1b"><label for="q1b">Bette Midler</label>        
+					  <input type="radio" name="q3" value="0" id="q1c"><label for="q1c">Barbara Streisand</label>         
+					  <input type="radio" name="q3" value="0" id="q1d"><label for="q1d">Ethel Merman</label> 
+					 </ul> 
+
+					<p class="question">4. In the 'Marine Biologist' episode, what type of golf ball did Kramer hit into the whale?</p>        
+
+					 <ul class="answers">            
+					  <input type="radio" name="q4" value="1" id="q1a"><label for="q1a">Titleist</label>        
+					  <input type="radio" name="q4" value="0" id="q1b"><label for="q1b">Callaway</label>        
+					  <input type="radio" name="q4" value="0" id="q1c"><label for="q1c">Nike</label>         
+					  <input type="radio" name="q4" value="0" id="q1d"><label for="q1d">Srixon</label> 
+					 </ul> 
+
+					<p class="question">5. What does Elaine do to embarrass herself at the company holiday party?</p>        
+
+					 <ul class="answers">            
+					  <input type="radio" name="q5" value="0" id="q1a"><label for="q1a">Sing</label>        
+					  <input type="radio" name="q5" value="1" id="q1b"><label for="q1b">Dance</label>        
+					  <input type="radio" name="q5" value="0" id="q1c"><label for="q1c">Drink  too much</label>         
+					  <input type="radio" name="q5" value="0" id="q1d"><label for="q1d">Give a terrible speech</label> 
+					 </ul> 
+
+					<p class="question">6. What career did George always want to pretend to do?</p>        
+
+					 <ul class="answers">            
+					  <input type="radio" name="q6" value="0" id="q1a"><label for="q1a">Baseball player</label>        
+					  <input type="radio" name="q6" value="0" id="q1b"><label for="q1b">Lawyer</label>        
+					  <input type="radio" name="q6" value="0" id="q1c"><label for="q1c">Astronaut</label>         
+					  <input type="radio" name="q6" value="1" id="q1d"><label for="q1d">Architect</label> 
+					 </ul> 
+
+					<p class="question">7. What type of pasta does Kramer use to make a figurine of Jerry?</p>        
+
+					 <ul class="answers">            
+					  <input type="radio" name="q7" value="0" id="q1a"><label for="q1a">Penne</label>        
+					  <input type="radio" name="q7" value="1" id="q1b"><label for="q1b">Fusilli</label>        
+					  <input type="radio" name="q7" value="0" id="q1c"><label for="q1c">Cavatapi</label>         
+					  <input type="radio" name="q7" value="0" id="q1d"><label for="q1d">Linguine</label> 
+					 </ul> 
+
+					<p class="question">8. What is Kramer's first name?</p>        
+
+					 <ul class="answers">            
+					  <input type="radio" name="q8" value="0" id="q1a"><label for="q1a">Kenny</label>        
+					  <input type="radio" name="q8" value="0" id="q1b"><label for="q1b">Carl</label>        
+					  <input type="radio" name="q8" value="1" id="q1c"><label for="q1c">Cosmo</label>         
+					  <input type="radio" name="q8" value="0" id="q1d"><label for="q1d">Bob</label> 
+					 </ul> 
+				</div>
+					<div id="submit-questions">
+						<input id="submit" type="button" value="Submit"/>
+					</div>
+			</div>
+				<div id="results">
+	   				<div>Answered Correctly: <span id="correct"></span></div>
+					<div>Answered Incorrectly: <span id="incorrect"></span></div>
+					<input id="startOver" type="button" value="Try Again"/>
+				</div>
+	</div>
+		<script src = "assets/javascript/app.js"></script>
+	</body>
+</html>
