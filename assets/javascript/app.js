@@ -1,3 +1,4 @@
+// THIS NEEDS LOTS OF WORK
 // I need to stop the timer after submit has been clicked
 // I need to reset timer with the try again button
 // I need to reset the radio buttons with the try again button
