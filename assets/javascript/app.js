@@ -1,182 +1,195 @@
-// THIS NEEDS LOTS OF WORK
-// I need to stop the timer after submit has been clicked
-// I need to reset timer with the try again button
-// I need to reset the radio buttons with the try again button
-// my score currently waits until time has expired to calculate
+//clock timer is starting 1 second too soon
+// start over button not working
 
 $(document).ready(function() { 
 
-  var correct = 0;
-  var incorrect = 0;
+  var questionsArray = [
+  {
+    question: "1. What MLB team did George Costanza work for?",
+    choiceA: "A: New York Mets", 
+    choiceB: "B: New York Yankees",
+    choiceC: "C: Cleveland Indians",
+    choiceD: "D: L.A. Dodgers",
+    correctAnswer: "B: New York Yankees"
+  },
+  {
+    question: "2. What candy bar did George have stolen by the mechanic at Puddy's car dealership?",
+    choiceA: "A: Clark Bar",  
+    choiceB: "B: Snickers",
+    choiceC: "C: Hershey's Bar",
+    choiceD: "D: Twix",
+    correctAnswer: "D: Twix"
+  }, 
+  {
+    question: "3. Which famous Broady star did Kramer injure in a softball game?",   
+    choiceA: "A: Liza Minnelli", 
+    choiceB: "B: Bette Midler",
+    choiceC: "C: Barbara Streisand",
+    choiceD: "D: Ethel Merman",
+    correctAnswer: "B: Bette Midler"  
+  },
+  {
+    question: "4. In the 'Marine Biologist' episode, what type of golf ball did Kramer hit into the whale?",   
+    choiceA: "A: Callaway",  
+    choiceC: "C: Titleist",
+    choiceD: "D: Srixon",
+    correctAnswer: "C: Titleist"
+  },
+  {
+    question: "5. What does Elaine do to embarrass herself at the company holiday party?",   
+    choiceA: "A: Dance", 
+    choiceB: "B: Sing",
+    choiceC: "C: Get wasted",
+    choiceD: "D: Break up with Puddy",
+    correctAnswer: "A: Dance"
+  },
+  {
+    question: "6. What career did George always want to pretend to do?",   
+    choiceA: "A: Baseball player",  
+    choiceB: "B: Importer, exporter",
+    choiceC: "C: Latex salesman",
+    choiceD: "D: Architect",
+    correctAnswer: "D: Architect"
+  },
+    {
+    question: "7. What type of pasta does Kramer use to make a figurine of Jerry?",  
+    choiceA: "A: Tortellini",  
+    choiceC: "C: Fusilli",
+    choiceD: "D: Linguine",
+    correctAnswer: "C: Fusilli"
+  },
+    {
+    question: "8. What is Kramer's first name?",  
+    choiceA: "A: Cosmo",  
+    choiceB: "B: Kenny",
+    choiceC: "C: Carl",
+    choiceD: "D: Maestro",
+    correctAnswer: "A: Cosmo"
+  },
+];
 
-//for hiding the questions before clicking start
-  function hideQuestions() { 
-    $("#display").hide();
+var clock;  
+var counter; 
+ 
+var rightAnswers = 0; 
+var wrongAnswers = 0; 
+var notAnswered = 0;  
+
+var timerRunning = false;
+
+var chosenAnswer; 
+
+var gifs = ['<img src="https://media.giphy.com/media/ap6wcjRyi8HoA/giphy.gif">',
+            '<img src="https://media.giphy.com/media/13xHqoOQOdFu5a/giphy.gif">',
+            '<img src="https://media.giphy.com/media/1ZkMDj88mQ1rO/giphy.gif">'
+            ];
+
+$("#start-button").append("<button>" + "Start" + "</button>");  // Displays the start button
+
+function nextQuestion() { 
+   
+    for (i = 0; i < questionsArray.length; i++) {
+    
+  clock = 30; 
+      $("#question").html(questionsArray[i].question); 
+      $("#choiceA").html(questionsArray[i].choiceA); 
+      $("#choiceB").html(questionsArray[i].choiceB);
+      $("#choiceC").html(questionsArray[i].choiceC);
+      $("#choiceD").html(questionsArray[i].choiceD);  
+  
+
+      if (i === questionsArray.length)  {  
+    gameOver(); 
+   }
   }
-  hideQuestions();
-//for showing the questions after clicking "start"
-  function showQuestions() { 
-    $("#display").show();
-  }
-  //for hiding the start button after it's clicked
-  function hideStart() { 
-    $("#start-screen").hide();
-  }
-// for hiding results div
-  function hideResults() {
-    $("#results").hide();
-  }
-  hideResults();
-// show the results div
-  function showResults() {
-    $("#results").show();
-    $("#correct").html(correct);
-    $("#incorrect").html(incorrect);
+};
+
+function timer() {  
+  clock--; 
+  $("#timer").html("Time Remaining: " + clock); //displays timer
+
+  if (!timerRunning) {  
+    counter = setInterval(timer, 1000); 
+    timerRunning = true;
   }
 
-    //start button:
-    $("#StartButton").on("click", function() {
-      countdown('countdown', 1, 30);
-      showQuestions(); 
-      hideStart(); 
-      });
+  if (clock === 0) { 
+    notAnswered++; 
+    alert("Sorry! too slow");
+    nextQuestion(); 
+  }
+};
 
-// submit button
-    $("#submit").on("click", function() {
-      hideQuestions();
-      showResults(); 
-      hideStart(); 
-      getScore();
-      });
+function answerChecker() { 
+  var correctAnswers = questionsArray[i].correctAnswer;
+  
+  if (chosenAnswer === correctAnswers) { 
+    $("#gif").html("<h1>" + "Correct!" + "</h1>" + gifs[0]);
+    rightAnswers++;
+  
+  } else if (chosenAnswer !== correctAnswers) { 
+    $("#gif").html("<h1>" + "Wrong!" + "</h1>" + gifs[1]);
+    wrongAnswers++; 
+  }
+};
 
-    // try again
-    $("#startOver").on("click", function() {
-      deselect();
-      resetButtons();
-    });
+function gameOver() {  //ends the game once all questions have been run through
 
-    function resetButtons() {
-      correct = 0;
-      incorrect = 0;
-      $("#display").show();
-      $("#results").hide();
-    }
+  clearInterval(counter); // stops counter
+    $("#display").remove();  // removes the timer, question, and answers
+    $("#gif1").remove();
+    $("#correct").html("Correct: " + rightAnswers); // correct answer
+    $("#incorrect").html("Incorrect " + wrongAnswers); // incorrect answers
+    $("#unanswered").html("Unanswered " + notAnswered);  // unanswered
+    $("#gif").html(gifs[2])
+    $("#start-over").append("<button>" + "Try Again!" + "</button>") // Button to start game over
+};
 
-// reset radio buttons... not working
-function deselect() {
-  $('input[name="q1"]').attr('checked', false);
-  $('input[name="q2"]').attr('checked', false);
-  $('input[name="q3"]').attr('checked', false);
-  $('input[name="q4"]').attr('checked', false);
-  $('input[name="q5"]').attr('checked', false);
-  $('input[name="q6"]').attr('checked', false);
-  $('input[name="q7"]').attr('checked', false);
-  $('input[name="q8"]').attr('checked', false);
-}
-
-// countdown timer
-function countdown(element, minutes, seconds) {
-    var time = minutes*60 + seconds;
-    var interval = setInterval(function() {
-        var el = document.getElementById(element);
-        if(time == 0) {
-            el.innerHTML = "Time's Up!";    
-            clearInterval(interval);
-            getScore();
-            hideQuestions();
-            showResults();
-            return;
-        }
-        var minutes = Math.floor( time / 60 );
-        var seconds = time % 60;
-        if (seconds < 10) seconds = "0" + seconds; 
-        var text = minutes + ':' + seconds;
-        el.innerHTML = text;
-        time--;
-    }, 1000);
-}
-
-// determine score for each question
-    function getScore() {
-  $("input[type='button']").click(function(){
-            var radioValue = $("input[name='q1']:checked").val();
-            if(radioValue == 1){
-                correct++;
-            }
-            else if(radioValue == 0){
-                incorrect++;
-            }
-        });
-   $("input[type='button']").click(function(){
-            var radioValue2 = $("input[name='q2']:checked").val();
-            if(radioValue2 == 1){
-                correct++;
-            }
-            else if(radioValue2 == 0){
-                incorrect++;
-            }
-        });
-    $("input[type='button']").click(function(){
-            var radioValue3 = $("input[name='q3']:checked").val();
-            if(radioValue3 == 1){
-                correct++;
-            }
-            else if(radioValue3 == 0){
-                incorrect++;
-            }
-        });
-     $("input[type='button']").click(function(){
-            var radioValue4 = $("input[name='q4']:checked").val();
-            if(radioValue4 == 1){
-                correct++;
-            }
-            else if(radioValue4 == 0){
-                incorrect++;
-            }
-        });
-      $("input[type='button']").click(function(){
-            var radioValue5 = $("input[name='q5']:checked").val();
-            if(radioValue5 == 1){
-                correct++;
-            }
-            else if(radioValue5 == 0){
-                incorrect++;
-            }
-        });
-       $("input[type='button']").click(function(){
-            var radioValue6 = $("input[name='q6']:checked").val();
-            if(radioValue6 == 1){
-                correct++;
-            }
-            else if(radioValue6 == 0){
-                incorrect++;
-            }
-        });
-        $("input[type='button']").click(function(){
-            var radioValue7 = $("input[name='q7']:checked").val();
-            if(radioValue7 == 1){
-                correct++;
-            }
-            else if(radioValue7 == 0){
-                incorrect++;
-            }
-        });
-         $("input[type='button']").click(function(){
-            var radioValue8 = $("input[name='q8']:checked").val();
-            if(radioValue8 == 1){
-                correct++;
-            }
-            else if(radioValue8 == 0){
-                incorrect++;
-            }
-        });
-}
+$("#start-over").on("click", function() { 
+  nextQuestion(); 
+  timer();  
 });
 
-// function checkGuess(value, currentQuestion) {
-//   for (var i = 0; i < question.length; i += 1) {
-//     if (question[i][currentQuestion].answer === value) {
-//       return value;
-//     }
-//   }
-// };
+$("#start-button").on("click", function() { 
+  $("#start-button").remove(); 
+  nextQuestion(); 
+  timer();  
+});
+
+$("#choiceA").on("click", function() {  
+  chosenAnswer = questionsArray[i].choiceA;  
+  answerChecker();  
+  nextQuestion();   
+  timer();  
+
+});
+
+$("#choiceB").on("click", function() {
+  chosenAnswer = questionsArray[i].choiceB;
+  answerChecker();
+  nextQuestion(); 
+  timer();
+});
+
+$("#choiceC").on("click", function() {
+  chosenAnswer = questionsArray[i].choiceC;
+  answerChecker();
+  nextQuestion(); 
+  timer();  
+});
+
+$("#choiceD").on("click", function() {
+  chosenAnswer = questionsArray[i].choiceD;
+  answerChecker();
+  nextQuestion(); 
+  timer();
+});
+
+});
+
+
+
+// var i = -1; 
+
+// if (i < (questionArray.length - 1)) { 
+//   i++;  
