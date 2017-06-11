@@ -5,22 +5,22 @@
 	    <title>Trivia Game</title>
 	    <!-- Added link to the jQuery Library -->
 	    <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+	    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	    <link rel="stylesheet" href="assets/css/style.css">
 	</head>
 
 	<body>
-	<div class="container">
-		<div>Trivia!</div>
-		
-			<div id="start-button"></div>
-
+	<div class="container text-center">
+		<h1><strong>Seinfeld Trivia!</strong></h1>
+		<br>
+			<div>
+				<button id="start-button" class="btn btn-lg btn-primary">Start!</button>
+			</div>
 			<div id="display">
 				<div id="timer"></div>
+				<br>
 				<div id="question"></div>
-				<div id="choiceA"></div>
-				<div id="choiceB"></div>
-				<div id="choiceC"></div>
-				<div id="choiceD"></div>
+				<div id="buttons" class="btn-group-vertical"></div>
 			</div>
 				<div id="results">
 	   				<div><span id="correct"></span></div>
