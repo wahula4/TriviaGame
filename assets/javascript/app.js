@@ -64,7 +64,7 @@ var questionsArray = [
 ];
 
 var counter = 0;
-var time = 3;
+var time = 10;
 var choices = [questionsArray[counter].choiceA, 
                questionsArray[counter].choiceB,
                questionsArray[counter].choiceC,
@@ -81,51 +81,63 @@ var gifs = ['<img src="https://media.giphy.com/media/ap6wcjRyi8HoA/giphy.gif">',
 
 $(document).ready(function() { 
 
-$("#start-button").on("click", function() { 
+$(document).on("click","#start-button", function() { 
   $("#start-button").remove(); 
   createElements();   
   nextQuestion();
 });
 
 function createElements() {
+
+  $(".Q1").html(questionsArray[counter].choiceA)
+  $(".Q2").html(questionsArray[counter].choiceB)
+  $(".Q3").html(questionsArray[counter].choiceC)
+  $(".Q4").html(questionsArray[counter].choiceD)
+
   var question = $("<p>");
-        question.html(questionsArray[0].question);
-    $("#question").append(question);
-    // Creating 4 p of choices available
-    for(var i = 0; i < 4; i++){
-        var choice = $("<p>");
-            choice.attr({
-                "class":"choice btn rounded",
-                "id":"choice" + i
-            });
-            choice.html(choices[i]);
-        $("#buttons").append(choice); // adding them to the DOM   
+        question.html(questionsArray[counter].question);
+    $("#question").html(question);
+  //   // Creating 4 p of choices available
+  //   for(var i = 0; i < 4; i++){
+  //       var choice = $("<p>");
+  //           choice.attr({
+  //               "class":"choice btn rounded",
+  //               "id":"choice" + i
+  //           });
+  //           choice.html(choices[i]);
+  //       $("#buttons").append(choice); // adding them to the DOM   
         $("#timer").html("Time Remaining: " + time);
         $("#display").addClass("background");
-    }};
+    
+  };
 
-    $(".choice").on('click', function () {
+    $(document).on('click',".choice", function () {
     var value = $(this).html(); // getters and setters
     
-    var correct = questionsArray[i].correctAnswer;
+    var correct = questionsArray[counter].correctAnswer;
     // Checking if the user got the corect answer or not
     if(value !== correct){
-        console.log("Sorry, you lose");
+        console.log("wrong answer");
         $("#gif").html("<h1>" + "Wrong!" + "</h1>" + gifs[1]);
         wrongAnswers++;
         
+        
     } else{
-        console.log("We win!!");
+        console.log("right answer");
          $("#gif").html("<h1>" + "Correct!" + "</h1>" + gifs[0]);
         rightAnswers++;
+        
     }
     counter++;
-    console.log(value);
+    createElements();
+    console.log("counter: " + counter);
+    console.log("value chosen: " + value);
 });
 
 function nextQuestion() { 
-   var timer = setInterval(function () {
+    var timer = setInterval(function () {
        time--;
+       $("#timer").html("Time Remaining: " + time);
        
        if(time <= 0) {
           counter++;
@@ -134,15 +146,20 @@ function nextQuestion() {
                    questionsArray[counter].choiceC,
                    questionsArray[counter].choiceD
                   ];
-        time = 3;
+        time = 10;
+        // $("#question").html(questionsArray[counter].question);
+        createElements();
+      }
         if (counter >= 7) {
           clearInterval(timer);
           gameOver();
         }
-       }
-   }, 1000);
+       
+  }, 1000);
     // gameOver(); 
-   };
+    console.log("time: " + time);
+};
+
 
 function reset() {
   counter = 0;
@@ -155,14 +172,13 @@ function reset() {
   createElements();
 }
 
-$("#start-over").on("click", function() { 
+$(document).on("click","#start-over", function() { 
   reset();  
   });
-});
 
 function gameOver() {  //ends the game once all questions have been run through
 
-  // clearInterval(counter); // stops counter
+  clearInterval(counter); // stops counter
     $("#display").remove();  // removes the timer, question, and answers
     $("#gif1").remove();
     $("#correct").html("Correct: " + rightAnswers); // correct answer
@@ -172,6 +188,4 @@ function gameOver() {  //ends the game once all questions have been run through
     $("#results").addClass("background");
     $("#start-over").append("<button>" + "Try Again!" + "</button>") // Button to start game over
 };
-
-
-
+});
