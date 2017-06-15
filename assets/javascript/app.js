@@ -25,7 +25,8 @@ var questionsArray = [
   },
   {
     question: "4. In the 'Marine Biologist' episode, what type of golf ball did Kramer hit into the whale?",   
-    choiceA: "A: Callaway",  
+    choiceA: "A: Callaway",
+    choiceB: "B: Nike",  
     choiceC: "C: Titleist",
     choiceD: "D: Srixon",
     correctAnswer: "C: Titleist"
@@ -48,7 +49,8 @@ var questionsArray = [
   },
     {
     question: "7. What type of pasta does Kramer use to make a figurine of Jerry?",  
-    choiceA: "A: Tortellini",  
+    choiceA: "A: Tortellini",
+    choiceB: "B: Cavatappi",  
     choiceC: "C: Fusilli",
     choiceD: "D: Linguine",
     correctAnswer: "C: Fusilli"
@@ -73,7 +75,6 @@ var choices = [questionsArray[counter].choiceA,
 var rightAnswers = 0; 
 var wrongAnswers = 0; 
 var notAnswered = 0;  
-var startButton = $("#start-button").clone();
 
 var gifs = ['<img src="https://media.giphy.com/media/ap6wcjRyi8HoA/giphy.gif">',
             '<img src="https://media.giphy.com/media/13xHqoOQOdFu5a/giphy.gif">',
