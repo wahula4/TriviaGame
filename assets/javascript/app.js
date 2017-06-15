@@ -73,6 +73,7 @@ var choices = [questionsArray[counter].choiceA,
 var rightAnswers = 0; 
 var wrongAnswers = 0; 
 var notAnswered = 0;  
+var startButton = $("#start-button").clone();
 
 var gifs = ['<img src="https://media.giphy.com/media/ap6wcjRyi8HoA/giphy.gif">',
             '<img src="https://media.giphy.com/media/13xHqoOQOdFu5a/giphy.gif">',
@@ -129,6 +130,7 @@ function createElements() {
         
     }
     counter++;
+    time = 10;
     createElements();
     console.log("counter: " + counter);
     console.log("value chosen: " + value);
@@ -141,16 +143,13 @@ function nextQuestion() {
        
        if(time <= 0) {
           counter++;
-        choices = [questionsArray[counter].choiceA, 
-                   questionsArray[counter].choiceB,
-                   questionsArray[counter].choiceC,
-                   questionsArray[counter].choiceD
-                  ];
+
         time = 10;
+        notAnswered++;
         // $("#question").html(questionsArray[counter].question);
         createElements();
       }
-        if (counter >= 7) {
+        if (counter > 7) {
           clearInterval(timer);
           gameOver();
         }
@@ -166,9 +165,12 @@ function reset() {
   rightAnswers = 0; 
   wrongAnswers = 0; 
   notAnswered = 0;
-  time = 3;
+  time = 10;
+  $("#start-button").append(startButton);
   $("#start-over").remove();
-  $("#display").show();
+  $("#results").remove();
+  // $("#display").append();
+  $("#gif").remove();
   createElements();
 }
 
