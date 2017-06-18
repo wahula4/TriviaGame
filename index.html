@@ -9,7 +9,40 @@
 	    <link rel="stylesheet" href="assets/css/style.css">
 	</head>
 
-	<body>
+<body>
+	<div class="container text-center">
+		<h1><strong>Seinfeld Trivia!</strong></h1>
+		<br>
+			<div>
+				<button id="start-button" class="btn btn-lg btn-primary">Start!</button>
+			</div>
+			<div id="display">
+				<div id="timer"></div>
+				<br>
+				<div id="question">
+				</div>
+				<div id="buttons" class="btn-group-vertical">
+					<p class="Q1 choice btn rounded"></p>
+					<p class="Q2 choice btn rounded"></p>
+					<p class="Q3 choice btn rounded"></p>
+					<p class="Q4 choice btn rounded"></p>
+				</div>
+			</div>
+				<div id="results">
+	   				<div><span id="correct"></span></div>
+					<div><span id="incorrect"></span></div>
+					<div><span id="unanswered"></span></div>
+					<div id="gif"></div>
+					<div id="start-over"></div>
+				</div>
+	</div>
+		<script src = "assets/javascript/app.js"></script>
+	</body>
+</html>
+
+
+
+<!-- <body>
 	<div class="container text-center">
 		<h1><strong>Seinfeld Trivia!</strong></h1>
 		<br>
@@ -37,5 +70,4 @@
 				</div>
 	</div>
 		<script src = "assets/javascript/app.js"></script>
-	</body>
-</html>
+	</body> -->

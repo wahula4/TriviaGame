@@ -1,3 +1,6 @@
+// I need to fix my restart button
+// I need to set a timeout to have my gif show up after a question is answered, wait 3 seconds, then move to the next question
+
 var questionsArray = [
   {
     question: "1. What MLB team did George Costanza work for?",
@@ -90,7 +93,7 @@ $(document).on("click","#start-button", function() {
 });
 
 function createElements() {
-
+  $("gif").detach();
   $(".Q1").html(questionsArray[counter].choiceA)
   $(".Q2").html(questionsArray[counter].choiceB)
   $(".Q3").html(questionsArray[counter].choiceC)
@@ -115,24 +118,27 @@ function createElements() {
 
     $(document).on('click',".choice", function () {
     var value = $(this).html(); // getters and setters
-    
+   
     var correct = questionsArray[counter].correctAnswer;
     // Checking if the user got the corect answer or not
     if(value !== correct){
         console.log("wrong answer");
-        $("#gif").html("<h1>" + "Wrong!" + "</h1>" + gifs[1]);
+        $("#display").addClass("background").html("<h3>" + "Wrong! The answer is " + questionsArray[counter].correctAnswer + "</h3>" + gifs[1]);   
+        setTimeout(createElements, 3000);
         wrongAnswers++;
-        
-        
+
     } else{
         console.log("right answer");
-         $("#gif").html("<h1>" + "Correct!" + "</h1>" + gifs[0]);
-        rightAnswers++;
-        
+         $("#gif").html("<h3>" + "Correct!" + "</h3>" + gifs[0]);
+        rightAnswers++;     
     }
+
+   
     counter++;
     time = 10;
-    createElements();
+    // createElements();
+       
+    
     console.log("counter: " + counter);
     console.log("value chosen: " + value);
 });
