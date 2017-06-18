@@ -93,7 +93,6 @@ $(document).on("click","#start-button", function() {
 });
 
 function createElements() {
-  $("gif").detach();
   $(".Q1").html(questionsArray[counter].choiceA)
   $(".Q2").html(questionsArray[counter].choiceB)
   $(".Q3").html(questionsArray[counter].choiceC)
@@ -123,8 +122,8 @@ function createElements() {
     // Checking if the user got the corect answer or not
     if(value !== correct){
         console.log("wrong answer");
-        $("#display").addClass("background").html("<h3>" + "Wrong! The answer is " + questionsArray[counter].correctAnswer + "</h3>" + gifs[1]);   
-        setTimeout(createElements, 3000);
+        $("#gif").addClass("background").html("<h3>" + "Wrong! The answer is " + questionsArray[counter].correctAnswer + "</h3>" + gifs[1]);   
+        // setTimeout(createElements, 3000);
         wrongAnswers++;
 
     } else{
@@ -133,10 +132,9 @@ function createElements() {
         rightAnswers++;     
     }
 
-   
     counter++;
     time = 10;
-    // createElements();
+    createElements();
        
     
     console.log("counter: " + counter);
